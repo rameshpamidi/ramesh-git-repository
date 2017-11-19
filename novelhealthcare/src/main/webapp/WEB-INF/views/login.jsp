@@ -1,5 +1,4 @@
-
-<%@include file="includes/commons/taglibs.jsp"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
 <html lang="en">
 <!-- BEGIN HEAD -->

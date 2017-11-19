@@ -1,4 +1,4 @@
-<%@include file="../commons/taglibs.jsp" %>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <!-- Meta, title, CSS, favicons, etc. -->
 <meta charset="utf-8">
@@ -10,8 +10,8 @@
 <!-- Font Awesome -->
 <link  href='<spring:url value="/assets/css/font-awesome/font-awesome.min.css"/>'  rel="stylesheet">
 <!-- NProgress -->
-<link  href='<spring:url value="/assets/nprogress/nprogress.css"/>'  rel="stylesheet">
+<link  href='<spring:url value="/assets/css/nprogress/nprogress.css"/>'  rel="stylesheet">
 <!-- Animate.css -->
-<link  href='<spring:url value="/assets/vendors/animate.min.css"/>'  rel="stylesheet">
+<link  href='<spring:url value="/assets/css/vendors/animate.min.css"/>'  rel="stylesheet">
 <!-- Custom Theme Style -->
-<link  href='<spring:url value="/assets/build/custom.min.css"/>'  rel="stylesheet">
+<link  href='<spring:url value="/assets/css/build/custom.min.css"/>'  rel="stylesheet">
