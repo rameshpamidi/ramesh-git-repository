@@ -1,10 +1,10 @@
 
-<%@include file="includes/loginpage/loginpage_taglibs.jsp"%>
+<%@include file="includes/loginpage/taglibs.jsp"%>
 <!DOCTYPE html>
 <html lang="en">
 <!-- BEGIN HEAD -->
 <head>
-<%@include file="includes/loginpage/loginpage_head.jsp"%>
+<%@include file="includes/loginpage/head.jsp"%>
 </head>
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
