@@ -1,5 +1,5 @@
 
-<%@include file="includes/loginpage/taglibs.jsp"%>
+<%@include file="includes/commons/taglibs.jsp"%>
 <!DOCTYPE html>
 <html lang="en">
 <!-- BEGIN HEAD -->
