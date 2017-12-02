@@ -1,8 +1,9 @@
 package com.dotridge.nhc.config;
-
 import java.util.Properties;
+
 import javax.naming.NamingException;
 import javax.sql.DataSource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -11,13 +12,11 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.jndi.JndiTemplate;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @ComponentScan(basePackages = {"com.dotridge.nhc.repository", "com.dotridge.nhc.service"})
 @PropertySource(value = {"classpath:hibernate.properties"})
 @PropertySource(value = {"classpath:jndi.properties"})
-@EnableTransactionManagement
 public class ApplicationConfig {
 
   @Autowired

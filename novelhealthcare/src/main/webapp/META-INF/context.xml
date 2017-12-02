@@ -20,7 +20,7 @@
     <!-- web application will be reloaded.                                   -->
     <WatchedResource>WEB-INF/web.xml</WatchedResource>
     <WatchedResource>${catalina.base}/conf/web.xml</WatchedResource>
-     <Resource auth="Container" driverClassName="com.mysql.jdbc.Driver" maxActive="20" maxIdle="10" maxWait="1000" name="jdbc/novelhealthds" password="ramesh" type="javax.sql.DataSource" url="jdbc:mysql://localhost:3306/novelhealthcare_db" username="root"/>
+     <Resource auth="Container" driverClassName="com.mysql.jdbc.Driver" maxActive="50" maxIdle="10" maxWait="1000" name="jdbc/novelhealthds" username="root" password="ramesh" type="javax.sql.DataSource" url="jdbc:mysql://localhost:3306/novelhealthcare_db" />
 
     <!-- Uncomment this to disable session persistence across Tomcat restarts -->
     <!--
