@@ -1,19 +1,28 @@
 package com.dotridge.nhc.entity;
 
 import java.io.Serializable;
-
+import java.util.Date;
+import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**
  * The Class Branch.
  */
 @Entity
+@Cacheable(value=true)
+@Cache(usage=CacheConcurrencyStrategy.READ_WRITE)
 @Table(name="branch")
+
 public class HospitalBranch implements Serializable {
 
 	/** The Constant serialVersionUID. */
@@ -23,6 +32,7 @@ public class HospitalBranch implements Serializable {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="branch_id")
 	private int branchId;
+	
 	@Column(name="address1",nullable=false)
 	private String address1;
 	
@@ -47,6 +57,19 @@ public class HospitalBranch implements Serializable {
 	@Column(name="image",nullable=true)
 	private String image;
 	
+	@Column(name="created_by",nullable=true)
+	private String  createdBy;
+	
+	@Temporal(TemporalType.DATE)
+	@Column(name="created_date",nullable=true)
+	private Date createdDate;
+	
+	@Column(name="updated_by",nullable=true)
+	private String updatedBy;
+	
+	@Temporal(TemporalType.DATE)
+	@Column(name="updated_date",nullable=true)
+	private Date updatedDate;
 	
 	public int getBranchId() {
 		return branchId;

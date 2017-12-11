@@ -1,6 +1,6 @@
 package com.dotridge.nhc.controller;
 
-import java.util.Map;
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -14,11 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.dotridge.nhc.model.HospitalBranchForm;
-import com.dotridge.nhc.model.HospitalForm;
+import com.dotridge.nhc.model.BranchBean;
+import com.dotridge.nhc.model.HospitalBean;
 import com.dotridge.nhc.service.HospitalService;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class HospitalController.
  */
@@ -38,7 +37,7 @@ public class HospitalController {
 	 */
 	@RequestMapping(value = { "/addhospitalpage" }, method = RequestMethod.GET)
 	public String addHospitalPage(Model model) {
-		model.addAttribute("hospitalForm", new HospitalForm());
+		model.addAttribute("hospitalForm", new HospitalBean());
 		return "superadmin/addHospitalPage";
 	}
 
@@ -54,15 +53,15 @@ public class HospitalController {
 	 * @return the string
 	 */
 	@RequestMapping(value = { "/addhospital" }, method = RequestMethod.POST)
-	public String addHospital(@Valid @ModelAttribute("hospitalForm") HospitalForm hospitalForm, BindingResult result,
-			Model model) {
+	public String addHospitalHandler(@Valid @ModelAttribute("hospitalForm") HospitalBean hospitalForm,
+			BindingResult result, Model model) {
 		String viewPage = null;
 		if (result.hasErrors()) {
 			viewPage = "superadmin/addHospitalPage";
 			return viewPage;
 		} else {
-			HospitalForm hospital = hospitalService.addHospital(hospitalForm);
-			if (hospital.getHospitalId() != 0) {
+			HospitalBean hospital = hospitalService.addHospital(hospitalForm);
+			if (hospital != null) {
 				viewPage = viewAllHospitalsPage(model);
 			}
 		}
@@ -95,9 +94,9 @@ public class HospitalController {
 	 * @return the string
 	 */
 	@RequestMapping(value = { "/edithospital" }, method = RequestMethod.POST)
-	public String editHospital(@Valid @ModelAttribute("hospitalForm") HospitalForm hospitalForm, Model model) {
+	public String editHospitalHandler(@Valid @ModelAttribute("hospitalForm") HospitalBean hospitalForm, Model model) {
 		String viewPage = null;
-		HospitalForm updatedHospital = hospitalService.updateHospital(hospitalForm);
+		HospitalBean updatedHospital = hospitalService.updateHospital(hospitalForm);
 		if (updatedHospital != null)
 			viewPage = viewAllHospitalsPage(model);
 		else
@@ -128,7 +127,7 @@ public class HospitalController {
 	 * @return the string
 	 */
 	@RequestMapping(value = { "/deletehospital" }, method = RequestMethod.GET)
-	public String deleteHospital(@RequestParam("hospId") int hospId, Model model) {
+	public String deleteHospitalHandler(@RequestParam("hospId") int hospId, Model model) {
 		hospitalService.deleteHospital(hospId);
 		return viewAllHospitalsPage(model);
 
@@ -155,8 +154,10 @@ public class HospitalController {
 	 *
 	 * @param hospId
 	 *            the hosp id
-	 * @param model
-	 *            the model
+	 * @param hospName
+	 *            the hosp name
+	 * @param modelMap
+	 *            the model map
 	 * @return the string
 	 */
 	@RequestMapping(value = { "/addbranchpage" }, method = RequestMethod.GET)
@@ -164,7 +165,7 @@ public class HospitalController {
 			ModelMap modelMap) {
 		modelMap.put("hospId", hospId);
 		modelMap.put("hospName", hospName);
-		modelMap.put("hospitalBranch", new HospitalBranchForm());
+		modelMap.put("hospitalBranch", new BranchBean());
 		return "superadmin/addBranchPage";
 	}
 
@@ -173,24 +174,29 @@ public class HospitalController {
 	 *
 	 * @param hospitalBranchForm
 	 *            the hospital branch form
+	 * @param result
+	 *            the result
 	 * @param hospId
 	 *            the hosp id
+	 * @param hospName
+	 *            the hosp name
 	 * @param modelmap
 	 *            the modelmap
 	 * @return the string
 	 */
 	@RequestMapping(value = { "/addbranch" }, method = RequestMethod.POST)
-	public String addBranch(@Valid @ModelAttribute("hospitalBranch") HospitalBranchForm hospitalBranchForm,
-			BindingResult result, @RequestParam("hospId") int hospId,@RequestParam("hospName") String hospName, ModelMap modelmap) {
+	public String addBranchHandler(@Valid @ModelAttribute("hospitalBranch") BranchBean hospitalBranchForm,
+			BindingResult result, @RequestParam("hospId") int hospId, @RequestParam("hospName") String hospName,
+			ModelMap modelmap) {
 		String viewPage = null;
 		if (result.hasErrors()) {
 			modelmap.put("hospId", hospId);
 			modelmap.put("hospName", hospName);
 			viewPage = "superadmin/addBranchPage";
 		} else {
-			HospitalBranchForm branchForm = hospitalService.addHospitalBranch(hospitalBranchForm, hospId);
+			BranchBean branchForm = hospitalService.addHospitalBranch(hospitalBranchForm, hospId);
 			if (branchForm.getBranchId() != 0) {
-				viewPage = viewBranches(hospId, modelmap);
+				viewPage = viewBranchesPage(hospId, hospName, modelmap);
 			} else {
 				modelmap.put("failuremsg", "adding branch failed!..");
 				viewPage = "superadmin/addBranchPage";
@@ -200,19 +206,101 @@ public class HospitalController {
 	}
 
 	/**
+	 * Edits the branchpage.
+	 *
+	 * @param hospId
+	 *            the hosp id
+	 * @param branchId
+	 *            the branch id
+	 * @param hospName
+	 *            the hosp name
+	 * @param modelMap
+	 *            the model map
+	 * @return the string
+	 */
+	@RequestMapping(value = { "/editbranchpage" }, method = RequestMethod.GET)
+	public String editBranchpage(@RequestParam("hospId") int hospId, @RequestParam("branchId") int branchId,
+			@RequestParam("hospName") String hospName, ModelMap modelMap) {
+		modelMap.put("hospitalBranch", hospitalService.getHospitalBranchById(branchId));
+		modelMap.put("hospId", hospId);
+		modelMap.put("hospName", hospName);
+		return "superadmin/editBranchPage";
+	}
+
+	/**
+	 * Edits the branch.
+	 *
+	 * @param hospitalBranchForm
+	 *            the hospital branch form
+	 * @param result
+	 *            the result
+	 * @param hospId
+	 *            the hosp id
+	 * @param hospName
+	 *            the hosp name
+	 * @param modelmap
+	 *            the modelmap
+	 * @return the string
+	 */
+	@RequestMapping(value = { "/editbranch" }, method = RequestMethod.POST)
+	public String editBranchHandler(@Valid @ModelAttribute("hospitalBranch") BranchBean hospitalBranchForm,
+			BindingResult result, @RequestParam("hospId") int hospId, @RequestParam("hospName") String hospName,
+			ModelMap modelmap) {
+		String viewPage = null;
+		if (result.hasErrors()) {
+			modelmap.put("hospId", hospId);
+			modelmap.put("hospName", hospName);
+			viewPage = "superadmin/editBranchPage";
+		} else {
+			BranchBean branchForm = hospitalService.updateHospitalBranch(hospitalBranchForm);
+			if (branchForm != null) {
+				viewPage = viewBranchesPage(hospId, hospName, modelmap);
+			} else {
+				modelmap.put("failuremsg", "updating branch failed!..");
+				viewPage = "superadmin/editBranchPage";
+			}
+		}
+		return viewPage;
+	}
+
+	/**
+	 * Delete branch.
+	 *
+	 * @param hospId
+	 *            the hosp id
+	 * @param hospName
+	 *            the hosp name
+	 * @param branchId
+	 *            the branch id
+	 * @param modelMap
+	 *            the model map
+	 * @return the string
+	 */
+	@RequestMapping(value = { "/deletebranch" }, method = RequestMethod.GET)
+	public String deleteBranchHandler(@RequestParam("hospId") int hospId, @RequestParam("hospName") String hospName,
+			@RequestParam("branchId") int branchId, ModelMap modelMap) {
+		hospitalService.deleteHospitalBranch(branchId, hospId);
+		return viewBranchesPage(hospId, hospName, modelMap);
+	}
+
+	/**
 	 * View branches.
 	 *
 	 * @param hospId
 	 *            the hosp id
+	 * @param hospName
+	 *            the hosp name
 	 * @param modelmap
 	 *            the modelmap
 	 * @return the string
 	 */
 	@RequestMapping(value = { "/viewbranches" }, method = RequestMethod.GET)
-	public String viewBranches(@RequestParam("hospId") int hospId, ModelMap modelmap) {
-		Map<String, Object> branchMap = hospitalService.getAllBranches(hospId);
+	public String viewBranchesPage(@RequestParam("hospId") int hospId, @RequestParam("hospName") String hospName,
+			ModelMap modelmap) {
+		List<BranchBean> branches = hospitalService.getAllBranches(hospId);
 		modelmap.put("hospId", hospId);
-		modelmap.putAll(branchMap);
+		modelmap.put("hospName", hospName);
+		modelmap.put("branches", branches);
 		return "superadmin/viewBranchesPage";
 	}
 

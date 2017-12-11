@@ -2,7 +2,7 @@ package com.dotridge.nhc.model;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-public class LoginForm {
+public class LoginBean {
 	@NotEmpty(message = "must not be empty")
 	private String userName;
 	@NotEmpty(message="must not b empty")

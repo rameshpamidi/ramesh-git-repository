@@ -10,7 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.dotridge.nhc.model.HospitalForm;
+import com.dotridge.nhc.model.HospitalBean;
 import com.dotridge.nhc.service.HospitalService;
 
 
@@ -33,7 +33,7 @@ public class HomeController {
 	 */
 	@RequestMapping(value = { "/superadminhome" }, method = RequestMethod.GET)
 	public String superadminHomePage(Model model, HttpServletRequest request) {
-		List<HospitalForm> allHospitals = hospitalService.getAllHospitals();
+		List<HospitalBean> allHospitals = hospitalService.getAllHospitals();
 		model.addAttribute("totalhospitals", allHospitals.size());
 		return "superadmin/superadmin_home";
 	}

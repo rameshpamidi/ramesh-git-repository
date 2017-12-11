@@ -14,7 +14,35 @@
 			<c:if test="${requestScope.msg!=null}">
 				<h4 style="color: red;">${requestScope.msg}</h4>
 			</c:if>
-			<form:form method="post" role="form" id="form_login" action="./login" commandName="loginForm">
+			<form method="post" role="form" id="form_login" action="<c:url value='/j_spring_security_check' />" >
+				<div class="form-group">
+					<input type="text" class="input-field" id="username" placeholder="User name" name="j_userName" autocomplete="off" />
+				</div>
+				<div class="form-group">
+					<input type="password" class="input-field" id="password" placeholder="Password" name="j_password" autocomplete="off" />
+				</div>
+				<button type="submit" class="btn btn-primary">
+					Login <i class="fa fa-lock"></i>
+				</button>
+				<!--demo login buttons-->
+				<button type="button" class="btn btn-default" id="superadmin" onclick="demo_login(this.id)">Superadmin</button>
+				<button type="button" class="btn btn-default" id="admin" onclick="demo_login(this.id)">Admin</button>
+				<button type="button" class="btn btn-default" id="doctor" onclick="demo_login(this.id)">Doctor</button>
+
+				<br>
+				<br>
+				<button type="button" class="btn btn-default" id="patient" onclick="demo_login(this.id)">Patient</button>
+				<button type="button" class="btn btn-default" id="receptionist" onclick="demo_login(this.id)">Receptionist</button>
+				<button type="button" class="btn btn-default" id="laboratorist" onclick="demo_login(this.id)">Laboratorist</button>
+				<br>
+				<br>
+				<button type="button" class="btn btn-default" id="nurse" onclick="demo_login(this.id)">Nurse</button>
+				<button type="button" class="btn btn-default" id="accountant" onclick="demo_login(this.id)">Accountant</button>
+				<button type="button" class="btn btn-default" id="pharmacist" onclick="demo_login(this.id)">Pharmacist</button>
+				<!--demo login buttons-->
+			</form> 
+			
+			<%-- <form:form method="post" role="form" id="form_login" action="./login" commandName="loginForm">
 				<div class="form-group">
 					<form:input type="text" class="input-field" id="username" placeholder="User name" path="userName" autocomplete="off" />
 					<form:errors path="userName" cssClass="text-danger"></form:errors>
@@ -42,7 +70,7 @@
 				<button type="button" class="btn btn-default" id="accountant" onclick="demo_login(this.id)">Accountant</button>
 				<button type="button" class="btn btn-default" id="pharmacist" onclick="demo_login(this.id)">Pharmacist</button>
 				<!--demo login buttons-->
-			</form:form>
+			</form:form> --%>
 		</div>
 	</div>
 	<div class="image-area"></div>

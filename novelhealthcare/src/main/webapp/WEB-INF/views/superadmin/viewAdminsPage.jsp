@@ -21,69 +21,68 @@
 			<%@include file="superadmin_includes/superAdminBodyHeader.jsp"%>
 
 			<h3 style="margin: 20px 0px; color: #818da1; font-weight: 200;">
-				<i class="entypo-right-circled"></i> Hospitals
+				<i class="entypo-right-circled"></i> Admins
 			</h3>
 
 			<!-- <button onclick="showAjaxModal('http://localhost:8080/novelheathcare/addhospitalpage');" class="btn btn-primary pull-right">
 				<i class="fa fa-plus"></i>&nbsp;Add Hospital
 			</button> -->
-			<a href="./addhospitalpage"><button class="btn btn-primary pull-right">
-					<i class="fa fa-plus"></i>&nbsp;Add Hospital
+			<a href="./addAdminPage"><button class="btn btn-primary pull-right">
+					<i class="fa fa-plus"></i>&nbsp;Add Admin
 				</button> </a>
 			<div style="clear: both;"></div>
 			<br>
-			<table class="table table-bordered table-striped datatable" id="hospitals-table">
+			<table class="table table-bordered table-striped datatable" id="admins-table">
 				<thead>
 					<tr>
 						<th>Image</th>
-						<th>Hospital Name</th>
-						<th>websiteURL</th>
+						<th>First Name</th>
+						<th>Last Name</th>
+						<th>Email Id</th>
+						<th>Phone</th>
 						<th>Status</th>
-						<th>Options</th>
+						<th>options</th>
 					</tr>
 				</thead>
 
 				<tbody>
 					<c:choose>
-						<c:when test="${hospitals.size()>=1}">
-							<c:forEach items="${hospitals}" var="hospital">
+						<c:when test="${admins.size()>=1}">
+							<c:forEach items="${admins}" var="admin">
 								<tr>
 									<td><img src="http://creativeitem.com/demo/bayanno/uploads/doctor_image/1.jpg" class="img-circle" width="40px" height="40px"></td>
-									<td>${hospital.hospitalName}</td>
-									<td><a href="${hospital.websiteUrl}">${hospital.websiteUrl}</a></td>
+									<td>${admin.firstName}</td>
+									<td>${admin.lastName}</td>
+									<td>${admin.email}</td>
+									<td>${admin.phoneNo}</td>
 									<c:choose>
-										<c:when test="${hospital.status==true}">
+										<c:when test="${admin.status==true}">
 											<td>Active</td>
 										</c:when>
-										<c:when test="${hospital.status==false}">
+										<c:when test="${admin.status==false}">
 											<td>InActive</td>
 										</c:when>
 									</c:choose>
 									<td colspan="3">
 										<!-- <a onclick="showAjaxModal('http://localhost:8080/novelheathcare//addhospitalpage');" class="btn btn-info btn-sm"> <i
-											class="fa fa-pencil"></i>&nbsp;Edit</a> --> <a href="./edithospitalpage?hospId=${hospital.hospitalId}" class="btn btn-info btn-sm"> <i
+											class="fa fa-pencil"></i>&nbsp;Edit</a> --> <a href="./editadminpage?adminId=${admin.adminId}" class="btn btn-info btn-sm"> <i
 											class="fa fa-pencil"></i>&nbsp;Edit
-									</a> <a onclick="confirm_modal('http://localhost:8080/novelheathcare/deletehospital?hospId=${hospital.hospitalId}')"
+									</a> <a onclick="confirm_modal('http://localhost:8080/novelheathcare/deleteadmin?adminId=${admin.adminId}')"
 										class="btn btn-danger btn-sm"> <i class="fa fa-trash-o"></i>&nbsp;Delete
-									</a> <a href="./viewbranches?hospId=${hospital.hospitalId}&&hospName=${hospital.hospitalName}" class="btn btn-info btn-sm"> <i class="fa fa-eye"></i>&nbsp;View Branches
-									</a>
+									</a> 
 									</td>
 								</tr>
 							</c:forEach>
 						</c:when>
 						<c:otherwise>
-							<td colspan="5" align="center">No Records</td>
+							<td colspan="7" align="center">No Records</td>
 						</c:otherwise>
 					</c:choose>
 				</tbody>
 			</table>
-
-
 			<!-- super admin footer -->
 			<%@include file="superadmin_includes/superAdminFooter.jsp"%>
-
 		</div>
-
 	</div>
 
 	<!-- (Ajax Modal)-->

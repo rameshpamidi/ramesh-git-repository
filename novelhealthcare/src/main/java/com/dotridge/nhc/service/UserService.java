@@ -1,8 +1,17 @@
 package com.dotridge.nhc.service;
 
-import com.dotridge.nhc.entity.User;
-
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface UserService.
+ */
 public interface UserService {
-	public User getUserByName(String name);
+	
+	/**
+	 * Gets the user by name.
+	 *
+	 * @param name the name
+	 * @return the user by name
+	 */
+	public Object[] getUserDetials(String name);
 
 }

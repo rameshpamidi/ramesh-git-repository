@@ -1,6 +1,6 @@
 package com.dotridge.nhc.repository;
 
-import com.dotridge.nhc.entity.User;
+import com.dotridge.nhc.entity.UserProfile;
 public interface UserDao {
-	public User getUserByName(String name);
+	public UserProfile getUserDetials(String name);
 }

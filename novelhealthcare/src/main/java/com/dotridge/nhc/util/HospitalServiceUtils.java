@@ -1,16 +1,13 @@
 package com.dotridge.nhc.util;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import com.dotridge.nhc.entity.Hospital;
 import com.dotridge.nhc.entity.HospitalBranch;
-import com.dotridge.nhc.model.HospitalBranchForm;
-import com.dotridge.nhc.model.HospitalForm;
+import com.dotridge.nhc.model.BranchBean;
+import com.dotridge.nhc.model.HospitalBean;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class HospitalServiceUtils.
  */
@@ -19,17 +16,16 @@ public class HospitalServiceUtils {
 	/**
 	 * Map bean to domain.
 	 *
-	 * @param hospitalForm
+	 * @param hospitalBean
 	 *            the hospital form
 	 * @return the hospital
 	 */
-	public static Hospital mapBeanToDomain(HospitalForm hospitalForm) {
-
+	public static Hospital mapBeanToDomain(HospitalBean hospitalBean) {
 		Hospital hospital = new Hospital();
-		hospital.setHospitalId(hospitalForm.getHospitalId());
-		hospital.setHospitalName(hospitalForm.getHospitalName());
-		hospital.setWebsiteUrl(hospitalForm.getWebsiteUrl());
-		hospital.setStatus(hospitalForm.isStatus());
+		hospital.setHospitalId(hospitalBean.getHospitalId());
+		hospital.setHospitalName(hospitalBean.getHospitalName());
+		hospital.setWebsiteUrl(hospitalBean.getWebsiteUrl());
+		hospital.setStatus(hospitalBean.isStatus());
 		return hospital;
 	}
 
@@ -40,33 +36,33 @@ public class HospitalServiceUtils {
 	 *            the hospital
 	 * @return the hospital form
 	 */
-	public static HospitalForm mapDomainToBean(Hospital hospital) {
-		HospitalForm hospitalForm = new HospitalForm();
-		hospitalForm.setHospitalId(hospital.getHospitalId());
-		hospitalForm.setHospitalName(hospital.getHospitalName());
-		hospitalForm.setWebsiteUrl(hospital.getWebsiteUrl());
-		hospitalForm.setStatus(hospital.isStatus());
-		return hospitalForm;
+	public static HospitalBean mapDomainToBean(Hospital hospital) {
+		HospitalBean hospitalBean = new HospitalBean();
+		hospitalBean.setHospitalId(hospital.getHospitalId());
+		hospitalBean.setHospitalName(hospital.getHospitalName());
+		hospitalBean.setWebsiteUrl(hospital.getWebsiteUrl());
+		hospitalBean.setStatus(hospital.isStatus());
+		return hospitalBean;
 
 	}
 
 	/**
 	 * Map branch form to branch domain.
 	 *
-	 * @param branchForm
+	 * @param branchBean
 	 *            the branch form
 	 * @return the hospital branch
 	 */
-	public static HospitalBranch mapBeanToDomain(HospitalBranchForm branchForm) {
+	public static HospitalBranch mapBeanToDomain(BranchBean branchBean) {
 		HospitalBranch hospitalBranch = new HospitalBranch();
-		hospitalBranch.setBranchId(branchForm.getBranchId());
-		hospitalBranch.setAddress1(branchForm.getAddress1());
-		hospitalBranch.setAddress2(branchForm.getAddress2());
-		hospitalBranch.setCity(branchForm.getCity());
-		hospitalBranch.setState(branchForm.getState());
-		hospitalBranch.setEmail(branchForm.getEmail());
-		hospitalBranch.setPhoneNo(branchForm.getPhoneNo());
-		hospitalBranch.setZipCode(branchForm.getZipcode());
+		hospitalBranch.setBranchId(branchBean.getBranchId());
+		hospitalBranch.setAddress1(branchBean.getAddress1());
+		hospitalBranch.setAddress2(branchBean.getAddress2());
+		hospitalBranch.setCity(branchBean.getCity());
+		hospitalBranch.setState(branchBean.getState());
+		hospitalBranch.setEmail(branchBean.getEmail());
+		hospitalBranch.setPhoneNo(branchBean.getPhoneNo());
+		hospitalBranch.setZipCode(branchBean.getZipcode());
 		return hospitalBranch;
 	}
 
@@ -77,8 +73,8 @@ public class HospitalServiceUtils {
 	 *            the hospital branch
 	 * @return the hospital branch form
 	 */
-	public static HospitalBranchForm mapDomainToBean(HospitalBranch hospitalBranch) {
-		HospitalBranchForm hospitalBranchForm = new HospitalBranchForm();
+	public static BranchBean mapDomainToBean(HospitalBranch hospitalBranch) {
+		BranchBean hospitalBranchForm = new BranchBean();
 		hospitalBranchForm.setBranchId(hospitalBranch.getBranchId());
 		hospitalBranchForm.setAddress1(hospitalBranch.getAddress1());
 		hospitalBranchForm.setAddress2(hospitalBranch.getAddress2());
@@ -98,17 +94,17 @@ public class HospitalServiceUtils {
 	 *            the hospitals
 	 * @return the list
 	 */
-	public static List<HospitalForm> mapHospitalDomainsToHospitalBeans(List<Hospital> hospitals) {
-		List<HospitalForm> hospitalForms = new ArrayList<HospitalForm>();
+	public static List<HospitalBean> mapHospitalDomainsToHospitalBeans(List<Hospital> hospitals) {
+		List<HospitalBean> hospitalBeans = new ArrayList<HospitalBean>();
 		for (Hospital hospital : hospitals) {
-			HospitalForm hospitalForm = new HospitalForm();
-			hospitalForm.setHospitalId(hospital.getHospitalId());
-			hospitalForm.setHospitalName(hospital.getHospitalName());
-			hospitalForm.setWebsiteUrl(hospital.getWebsiteUrl());
-			hospitalForm.setStatus(hospital.isStatus());
-			hospitalForms.add(hospitalForm);
+			HospitalBean hospitalBean = new HospitalBean();
+			hospitalBean.setHospitalId(hospital.getHospitalId());
+			hospitalBean.setHospitalName(hospital.getHospitalName());
+			hospitalBean.setWebsiteUrl(hospital.getWebsiteUrl());
+			hospitalBean.setStatus(hospital.isStatus());
+			hospitalBeans.add(hospitalBean);
 		}
-		return hospitalForms;
+		return hospitalBeans;
 	}
 
 	/**
@@ -118,34 +114,21 @@ public class HospitalServiceUtils {
 	 *            the hospital branches
 	 * @return the list
 	 */
-	@SuppressWarnings("unchecked")
-	public static Map<String, Object> mapBranchDomainsToBranchBeans(Map<String, Object> map) {
-		Map<String, Object> branchMap = new HashMap<String, Object>();
-		String hospName=null;
-		List<HospitalBranchForm> hospitalBranchForms = new ArrayList<HospitalBranchForm>();
-		for (Map.Entry<String, Object> entry : map.entrySet()) {
-			if (entry.getKey() == "branches") {
-				for (HospitalBranch hospitalBranch : (List<HospitalBranch>) entry.getValue()) {
-					HospitalBranchForm hospitalBranchForm = new HospitalBranchForm();
-					hospitalBranchForm.setAddress1(hospitalBranch.getAddress1());
-					hospitalBranchForm.setAddress2(hospitalBranch.getAddress2());
-					hospitalBranchForm.setCity(hospitalBranch.getCity());
-					hospitalBranchForm.setState(hospitalBranch.getState());
-					hospitalBranchForm.setZipcode(hospitalBranch.getZipCode());
-					hospitalBranchForm.setEmail(hospitalBranch.getEmail());
-					hospitalBranchForm.setPhoneNo(hospitalBranch.getPhoneNo());
-					hospitalBranchForms.add(hospitalBranchForm);
-				}
-			}
-			else
-				if(entry.getKey() == "hospName")
-				{
-					hospName=(String)entry.getValue();
-				}
+	public static List<BranchBean> mapBranchDomainsToBranchBeans(List<HospitalBranch> hospitalBranches) {
+		List<BranchBean> branchBeans = new ArrayList<BranchBean>();
+		for (HospitalBranch hospitalBranch : hospitalBranches) {
+			BranchBean branchBean = new BranchBean();
+			branchBean.setBranchId(hospitalBranch.getBranchId());
+			branchBean.setAddress1(hospitalBranch.getAddress1());
+			branchBean.setAddress2(hospitalBranch.getAddress2());
+			branchBean.setCity(hospitalBranch.getCity());
+			branchBean.setState(hospitalBranch.getState());
+			branchBean.setZipcode(hospitalBranch.getZipCode());
+			branchBean.setEmail(hospitalBranch.getEmail());
+			branchBean.setPhoneNo(hospitalBranch.getPhoneNo());
+			branchBeans.add(branchBean);
 		}
-		branchMap.put("hospName", hospName);
-		branchMap.put("branches", hospitalBranchForms);
-		return branchMap;
+		return branchBeans;
 	}
 
 }

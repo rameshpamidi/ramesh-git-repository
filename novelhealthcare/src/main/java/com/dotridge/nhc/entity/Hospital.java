@@ -4,8 +4,10 @@
 package com.dotridge.nhc.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Cacheable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,17 +15,27 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Type;
 
 /**
  * @author lenovo
  *
  */
+
 @Entity
+@Cacheable
+@Cache(usage=CacheConcurrencyStrategy.READ_WRITE)
 @Table(name = "hospital")
+
 public class Hospital implements Serializable {
 
 	private static final long serialVersionUID = -2784394389651621538L;
@@ -43,7 +55,22 @@ public class Hospital implements Serializable {
 	@Column(name="hospital_status")
 	private boolean status;
 	
-	@OneToMany(targetEntity=HospitalBranch.class,cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+	@Column(name="created_by",nullable=true)
+	private String  createdBy;
+	
+	@Temporal(TemporalType.DATE)
+	@Column(name="created_date",nullable=true)
+	private Date createdDate;
+	
+	@Column(name="updated_by",nullable=true)
+	private String updatedBy;
+	
+	@Temporal(TemporalType.DATE)
+	@Column(name="updated_date",nullable=true)
+	private Date updatedDate;
+	
+	@OneToMany(targetEntity=HospitalBranch.class,cascade=CascadeType.ALL,fetch=FetchType.LAZY,orphanRemoval=true)
+	@JoinTable(name="hospital_branch",joinColumns={@JoinColumn(name="hospital_id_fk")},inverseJoinColumns={@JoinColumn(name="branch_id_fk")})
 	private List<HospitalBranch> branches;
 
 	public int getHospitalId() {

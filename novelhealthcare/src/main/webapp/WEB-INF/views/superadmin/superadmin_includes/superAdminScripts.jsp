@@ -88,8 +88,18 @@
 
 <script type="text/javascript">
 	$(document).ready(function(event) {
-		event.preventDefault(); 
+		//event.preventDefault(); 
 		$("#branches-table").DataTable({
+			"iDisplayLength" : 5,
+			"aLengthMenu" : [ [ 5, 10, 25, 50, -1 ], [ 5, 10, 25, 50, "All" ] ]
+		});
+		 
+	});
+</script>
+<script type="text/javascript">
+	$(document).ready(function(event) {
+		//event.preventDefault(); 
+		$("#admins-table").DataTable({
 			"iDisplayLength" : 5,
 			"aLengthMenu" : [ [ 5, 10, 25, 50, -1 ], [ 5, 10, 25, 50, "All" ] ]
 		});

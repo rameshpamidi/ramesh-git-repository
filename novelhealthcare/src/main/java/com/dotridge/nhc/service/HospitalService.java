@@ -1,13 +1,11 @@
 package com.dotridge.nhc.service;
 
 import java.util.List;
-import java.util.Map;
 
-import com.dotridge.nhc.model.HospitalBranchForm;
-import com.dotridge.nhc.model.HospitalForm;
+import com.dotridge.nhc.model.BranchBean;
+import com.dotridge.nhc.model.HospitalBean;
 
 
-// TODO: Auto-generated Javadoc
 /**
  * The Interface HospitalService.
  */
@@ -16,10 +14,10 @@ public interface HospitalService {
 	/**
 	 * Adds the hospital.
 	 *
-	 * @param hosptialForm the hosptial form
+	 * @param hospitalBean the hosptial form
 	 * @return the hospital form
 	 */
-	public HospitalForm addHospital(HospitalForm hosptialForm);
+	public HospitalBean addHospital(HospitalBean hospitalBean);
    
 	/**
 	 * Adds the hospital branch.
@@ -27,15 +25,15 @@ public interface HospitalService {
 	 * @param branch the branch
 	 * @return the hospital form
 	 */
-	public HospitalBranchForm addHospitalBranch(HospitalBranchForm branch,final int hospId);
+	public BranchBean addHospitalBranch(BranchBean branch,final int hospId);
 	
 	/**
 	 * Update hospital.
 	 *
-	 * @param hospitalForm the hospital form
+	 * @param hospitalBean the hospital form
 	 * @return the hospital form
 	 */
-	public HospitalForm updateHospital(HospitalForm hospitalForm);
+	public HospitalBean updateHospital(HospitalBean hospitalBean);
 	
 	/**
 	 * Update hospital branch.
@@ -43,7 +41,7 @@ public interface HospitalService {
 	 * @param branch the branch
 	 * @return the hospital form
 	 */
-	public HospitalBranchForm updateHospitalBranch(HospitalBranchForm branch);
+	public BranchBean updateHospitalBranch(BranchBean branch);
 	
 	/**
 	 * Delete hospital.
@@ -57,7 +55,7 @@ public interface HospitalService {
 	 *
 	 * @param branchId the branch id
 	 */
-	public void deleteHospitalBranch(final int branchId);
+	public void deleteHospitalBranch(final int branchId,final int hospId);
 	
 	/**
 	 * Gets the hospital by id.
@@ -65,7 +63,7 @@ public interface HospitalService {
 	 * @param hospId the hosp id
 	 * @return the hospital by id
 	 */
-	public HospitalForm getHospitalById(final int hospId);
+	public HospitalBean getHospitalById(final int hospId);
 	
 	/**
 	 * Gets the hospital branch by id.
@@ -73,13 +71,13 @@ public interface HospitalService {
 	 * @param hospId the hosp id
 	 * @return the hospital branch by id
 	 */
-	public HospitalBranchForm  getHospitalBranchById(final int hospId);
+	public BranchBean  getHospitalBranchById(final int hospId);
 	/**
 	 * Gets the all hospitals.
 	 *
 	 * @return the all hospitals
 	 */
-	public List<HospitalForm> getAllHospitals();
+	public List<HospitalBean> getAllHospitals();
 
 	/**
 	 * Gets the all branches.
@@ -87,7 +85,7 @@ public interface HospitalService {
 	 * @param hospitalId the hospital id
 	 * @return the all branches
 	 */
-	public Map<String,Object> getAllBranches(final int hospitalId);
+	public List<BranchBean> getAllBranches(final int hospitalId);
 	
 	/**
 	 * Update hosptial status.

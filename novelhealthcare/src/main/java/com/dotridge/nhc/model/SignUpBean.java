@@ -1,6 +1,6 @@
 package com.dotridge.nhc.model;
 
-public class SignUpForm {
+public class SignUpBean {
   private String userName;
   private String email;
   private String password;

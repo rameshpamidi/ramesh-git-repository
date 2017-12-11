@@ -1,7 +1,6 @@
 package com.dotridge.nhc.repository;
 
 import java.util.List;
-import java.util.Map;
 
 import com.dotridge.nhc.entity.Hospital;
 import com.dotridge.nhc.entity.HospitalBranch;
@@ -55,7 +54,7 @@ public interface HospitalDao {
 	 *
 	 * @param branchId the branch id
 	 */
-	public void deleteHospitalBranch(final int branchId);
+	public void deleteHospitalBranch(final int branchId,final int hospId);
 	/**
 	 * Gets the hospital by id.
 	 *
@@ -70,7 +69,7 @@ public interface HospitalDao {
 	 * @param branchId the branch id
 	 * @return the branch by id
 	 */
-	public Hospital getBranchById(final int branchId);
+	public HospitalBranch getBranchById(final int branchId);
 	/**
 	 * Gets the all hospitals.
 	 *
@@ -85,7 +84,7 @@ public interface HospitalDao {
 	 * @param hospitalId the hospital id
 	 * @return the all branches
 	 */
-	public Map<String,Object> getAllBranches(final int hospitalId);
+	public List<HospitalBranch> getAllBranches(final int hospitalId);
 	
 	/**
 	 * Update hospital status.

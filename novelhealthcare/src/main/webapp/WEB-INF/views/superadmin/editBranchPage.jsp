@@ -22,7 +22,7 @@
 			<%@include file="superadmin_includes/superAdminBodyHeader.jsp"%>
 
 			<h3 style="margin: 20px 0px; color: #818da1; font-weight: 200;">
-				<i class="entypo-right-circled"></i>${hospName}<i class="entypo-right-circled"></i>Add Branch
+				<i class="entypo-right-circled"></i>${hospName}<i class="entypo-right-circled"></i>Edit Branch
 			</h3>
 			<div class="panel-heading">
 				<div class="panel-title">
@@ -31,9 +31,10 @@
 				</div>
 			</div>
 			<h4 style="">${failuremsg}</h4>
-			<form:form class="form-horizontal form-groups validate" action="./addbranch" method="post" commandName="hospitalBranch">
-				<input type="hidden" name="hospId" value="${hospId}">
-				<input type="hidden" name="hospName" value="${hospName}">
+			<form:form class="form-horizontal form-groups validate" action="./editbranch" method="post" commandName="hospitalBranch">
+			<input type="hidden" name="hospId" value="${hospId}">
+			<input type="hidden" name="hospName" value="${hospName}">
+			<form:input path="branchId"  />
 				<spring:bind path="address1">
 					<div class="form-group  ${status.error ? 'has-error' : ''}">
 						<label for="field-1" class="col-sm-3 control-label">Address1*</label>
@@ -122,7 +123,7 @@
 				</div>
 				<div class="col-sm-3 control-label col-sm-offset-2">
 					<button type="submit" class="btn btn-success" id="form-submit">
-						<i class="fa fa-check"></i> add branch
+						<i class="fa fa-check"></i> edit branch
 					</button>
 				</div>
 			</form:form>

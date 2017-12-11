@@ -41,7 +41,7 @@
 							<div class="icon">
 								<i class="fa fa-user"></i>
 							</div>
-							<div class="num" data-start="0" data-end="1" data-duration="1500" data-delay="0">1</div>
+							<div class="num" data-start="0" data-end="${totaladmins}" data-duration="1500" data-delay="0">1</div>
 							<h3>Admins</h3>
 						</div>
 					</a>

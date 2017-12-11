@@ -61,9 +61,10 @@
 									<td>${branch.phoneNo}</td>
 									<td colspan="2">
 										<!-- <a onclick="showAjaxModal('http://localhost:8080/novelheathcare//addhospitalpage');" class="btn btn-info btn-sm"> <i
-											class="fa fa-pencil"></i>&nbsp;Edit</a> --> <a href="./editbranch?hospId=${branch.branchId}" class="btn btn-info btn-sm"> <i
+											class="fa fa-pencil"></i>&nbsp;Edit</a> -->
+											 <a href="./editbranchpage?hospId=${hospId}&&branchId=${branch.branchId}&&hospName=${hospName}"  class="btn btn-info btn-sm"> <i
 											class="fa fa-pencil"></i>&nbsp;Edit
-									</a> <a onclick="confirm_modal('http://localhost:8080/novelheathcare/deletehospital?hospId=${branch.branchId}')" class="btn btn-danger btn-sm">
+									</a> <a onclick="confirm_modal('http://localhost:8080/novelheathcare/deletebranch?branchId=${branch.branchId}&&hospId=${hospId}&&hospName=${hospName}')" class="btn btn-danger btn-sm">
 											<i class="fa fa-trash-o"></i>&nbsp;Delete
 									</a>
 									</td>
