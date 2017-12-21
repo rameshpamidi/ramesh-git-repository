@@ -25,7 +25,7 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public AdminBean getAdminById(int adminId) {
-		return null;
+		return AdminServiceUtils.mapAdminDomainToAdminBean(adminDao.getAdminById(adminId));
 	}
 
 	@Override

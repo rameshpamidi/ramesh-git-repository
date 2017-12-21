@@ -30,12 +30,12 @@ public class Test {
 
 	public static void main(String[] args) {
 
-		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(ApplicationConfig.class);
+		/*AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(ApplicationConfig.class);
 		AdminDaoImpl bean = (AdminDaoImpl) context.getBean("adminDao");
-		/*bean.getAllHospitals();
-		bean.getAllHospitals();*/
-		/*bean.getAllBranches(8);
-		bean.getAllBranches(8);*/
+		bean.getAllHospitals();
+		bean.getAllHospitals();
+		bean.getAllBranches(8);
+		bean.getAllBranches(8);
 		Hospital hospital=new Hospital();
 		hospital.setHospitalName("kims");
 		hospital.setWebsiteUrl("www.kims.com");
@@ -49,7 +49,14 @@ public class Test {
 		admin.setPassword("ramesh@45");
 		admin.setStatus(true);
 		admin.setPhoneNumber(9969890915L);
-		admin.setHospital(hospital);
+		admin.setHospital(hospital);*/
+		
+		String s1="ramesh pamidi";  
+		String[] words=s1.split("\\s");//splits the string based on whitespace  
+		//using java foreach loop to print elements of string array  
+		for(String w:words){  
+		System.out.println(w);  
+		}  
 		
 	}
 

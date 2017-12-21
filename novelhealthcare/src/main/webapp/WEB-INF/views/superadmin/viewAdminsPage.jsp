@@ -65,7 +65,7 @@
 									</c:choose>
 									<td colspan="3">
 										<!-- <a onclick="showAjaxModal('http://localhost:8080/novelheathcare//addhospitalpage');" class="btn btn-info btn-sm"> <i
-											class="fa fa-pencil"></i>&nbsp;Edit</a> --> <a href="./editadminpage?adminId=${admin.adminId}" class="btn btn-info btn-sm"> <i
+											class="fa fa-pencil"></i>&nbsp;Edit</a> --> <a href="./updateAdminPage?adminId=${admin.adminId}" class="btn btn-info btn-sm"> <i
 											class="fa fa-pencil"></i>&nbsp;Edit
 									</a> <a onclick="confirm_modal('http://localhost:8080/novelheathcare/deleteadmin?adminId=${admin.adminId}')"
 										class="btn btn-danger btn-sm"> <i class="fa fa-trash-o"></i>&nbsp;Delete

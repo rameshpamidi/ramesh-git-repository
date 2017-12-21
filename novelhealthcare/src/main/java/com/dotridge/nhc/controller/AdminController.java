@@ -43,14 +43,19 @@ public class AdminController {
 	@RequestMapping(value = { "/addAdminPage" }, method = RequestMethod.GET)
 	public String showAddAdminPage(Model model) {
 		
+		Map<Integer, String> hospitalNames = showHospitalsInViewPage();
+		model.addAttribute("adminBean", new AdminBean());
+		model.addAttribute("hospitalNames", hospitalNames);
+		return "superadmin/addAdminPage";
+	}
+
+	private Map<Integer, String> showHospitalsInViewPage() {
 		List<HospitalBean> allHospitals = hospitalService.getAllHospitals();
 		Map<Integer,String> hospitalNames=new HashMap<Integer,String>();
 		for (HospitalBean hospitalBean : allHospitals) {
 			hospitalNames.put(hospitalBean.getHospitalId(),hospitalBean.getHospitalName());
 		}
-		model.addAttribute("adminBean", new AdminBean());
-		model.addAttribute("hospitalNames", hospitalNames);
-		return "superadmin/addAdminPage";
+		return hospitalNames;
 	}
 
 	/**
@@ -67,6 +72,7 @@ public class AdminController {
 	@RequestMapping(value = { "/addAdmin" }, method = RequestMethod.POST)
 	public String addAdminHandler(@Valid @ModelAttribute("adminBean") AdminBean adminBean, BindingResult bindingResult,
 			Model model) {
+		System.out.println();
 		String viewPage = null;
 		if (bindingResult.hasErrors()) {
 			viewPage = "superadmin/addAdminPage";
@@ -93,9 +99,12 @@ public class AdminController {
 	 */
 	@RequestMapping(value = { "/updateAdminPage" }, method = RequestMethod.GET)
 	public String showUpdateAdminPage(@RequestParam("adminId") int adminId, Model model) {
+	
 		AdminBean adminBean = adminService.getAdminById(adminId);
+		Map<Integer, String> hospitalNames = showHospitalsInViewPage();
 		model.addAttribute("adminBean", adminBean);
-		return "superadmin/updateAdminPage";
+		model.addAttribute("hospitalNames", hospitalNames);
+		return "superadmin/editAdminPage";
 	}
 
 	/**

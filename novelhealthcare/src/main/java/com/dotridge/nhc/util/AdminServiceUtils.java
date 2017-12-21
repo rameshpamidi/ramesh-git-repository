@@ -31,12 +31,21 @@ public class AdminServiceUtils {
 	public static AdminBean mapAdminDomainToAdminBean(Admin admin)
 	{
 		AdminBean adminBean=new AdminBean();
-		String[] strings = admin.getFullName().split("");
-		adminBean.setFirstName(strings[0]);
-		adminBean.setLastName(strings[1]);
+		String names[]=new String[2];
+		 names = admin.getFullName().split("\\s");
+		adminBean.setAdminId(admin.getUserId());
+		adminBean.setFirstName(names[0]);
+		adminBean.setLastName(names[1]);
+		adminBean.setGender(admin.getGender());
+		adminBean.setUserName(admin.getUserName());
 		adminBean.setEmail(admin.getEmail());
 		adminBean.setPhoneNo(admin.getPhoneNumber());
 		adminBean.setStatus(admin.getStatus());
+		adminBean.setAddress1(admin.getAddress().getAddress1());
+		adminBean.setAddress2(admin.getAddress().getAddress2());
+		adminBean.setCity(admin.getAddress().getCity());
+		adminBean.setState(admin.getAddress().getState());
+		adminBean.setZipCode(admin.getAddress().getZipCode());
 		return adminBean;
 	}
 	
@@ -45,6 +54,7 @@ public class AdminServiceUtils {
 		List<AdminBean> adminBeans=new ArrayList<AdminBean>();
 		for (Admin admin : admins) {
 			AdminBean adminBean=new AdminBean();
+			adminBean.setAdminId(admin.getUserId());
 			String[] strings = admin.getFullName().split("");
 			adminBean.setFirstName(strings[0]);
 			adminBean.setLastName(strings[1]);
