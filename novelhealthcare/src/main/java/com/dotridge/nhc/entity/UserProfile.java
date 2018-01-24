@@ -1,6 +1,7 @@
 package com.dotridge.nhc.entity;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 
 import javax.persistence.Cacheable;
 import javax.persistence.CascadeType;
@@ -12,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -68,13 +71,13 @@ public class UserProfile implements Serializable {
 	@JoinColumn(name = "address_id_fk", unique = true)
 	private Address address;
 	
-	@OneToOne(targetEntity=Role.class,cascade=CascadeType.ALL)
+	/*@OneToOne(targetEntity=Role.class,cascade=CascadeType.ALL)
 	@JoinColumn(name="role_id_fk")
-	private Role role;
+	private Role role;*/
 	
-	/*@OneToMany(targetEntity=Role.class,cascade=CascadeType.ALL)
+	@OneToMany(targetEntity=Role.class,cascade=CascadeType.ALL)
 	@JoinTable(name="user_role",joinColumns={@JoinColumn(name="user_id_fk")},inverseJoinColumns={@JoinColumn(name="role_id_fk")})
-	private Set<Role> roles;*/
+	private Set<Role> roles;
 
 	public int getUserId() {
 		return userId;
@@ -150,12 +153,13 @@ public class UserProfile implements Serializable {
 	}
 
 
-	public Role getRole() {
-		return role;
+
+	public Set<Role> getRoles() {
+		return roles;
 	}
 
-	public void setRole(Role role) {
-		this.role = role;
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
 	}
 
 	public boolean getStatus() {
@@ -179,7 +183,7 @@ public class UserProfile implements Serializable {
 		return "UserProfile [userId=" + userId + ", fullName=" + fullName + ", userName=" + userName + ", password="
 				+ password + ", email=" + email + ", phoneNumber=" + phoneNumber + ", gender=" + gender + ", status="
 				+ status + ", noOfLoginAttempts=" + noOfLoginAttempts + ", lastAttempt=" + lastAttempt + ", address="
-				+ address + ", role=" + role + "]";
+				+ address + ", roles=" + roles + "]";
 	}
 
 	@Override
@@ -194,7 +198,7 @@ public class UserProfile implements Serializable {
 		result = prime * result + noOfLoginAttempts;
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
 		result = prime * result + (int) (phoneNumber ^ (phoneNumber >>> 32));
-		result = prime * result + ((role == null) ? 0 : role.hashCode());
+		result = prime * result + ((roles == null) ? 0 : roles.hashCode());
 		result = prime * result + (status ? 1231 : 1237);
 		result = prime * result + userId;
 		result = prime * result + ((userName == null) ? 0 : userName.hashCode());
@@ -244,10 +248,10 @@ public class UserProfile implements Serializable {
 			return false;
 		if (phoneNumber != other.phoneNumber)
 			return false;
-		if (role == null) {
-			if (other.role != null)
+		if (roles == null) {
+			if (other.roles != null)
 				return false;
-		} else if (!role.equals(other.role))
+		} else if (!roles.equals(other.roles))
 			return false;
 		if (status != other.status)
 			return false;

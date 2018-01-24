@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.dotridge.nhc.model.HospitalBean;
 import com.dotridge.nhc.model.LoginBean;
 import com.dotridge.nhc.service.HospitalService;
-import com.dotridge.nhc.service.UserService;
 
 /**
  * The Class LoginController.
@@ -28,9 +27,9 @@ public class LoginController {
 
 	}
 
-	/** The user service. */
+	/** The user service. *//*
 	@Autowired
-	private UserService userService;
+	private UserDetailService userService;*/
 
 	/** The hospital service. */
 	@Autowired

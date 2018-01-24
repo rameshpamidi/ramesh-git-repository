@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.dotridge.nhc.entity.UserProfile;
 
 @Repository("userDao")
-public class UserDaoImpl implements UserDao {
+public class UserDetailsDaoImpl implements UserDetailsDao {
 
 	@Autowired
 	private SessionFactory sessionFactory;

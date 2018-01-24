@@ -21,7 +21,7 @@ import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
 @PropertySource(value = { "classpath:hibernate.properties" })
 @PropertySource(value = { "classpath:jndi.properties" })
 @ImportResource(value = { "classpath:novelhealth_security.xml" })
-@Import(SecurityConfig.class)
+@Import(WebSecurityConfig.class)
 public class ApplicationConfig {
 
 	@Autowired
