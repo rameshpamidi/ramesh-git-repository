@@ -2,6 +2,8 @@ package com.dotridge.nhc.service;
 
 import java.util.List;
 
+import org.springframework.security.access.prepost.PreAuthorize;
+
 import com.dotridge.nhc.model.AdminBean;
 
 /**
@@ -15,6 +17,7 @@ public interface AdminService {
 	 * @param adminForm the admin form
 	 * @return the admin form
 	 */
+	@PreAuthorize("hasRole('superadmin')")
 	public AdminBean addAdmin(AdminBean adminForm);
 
 	/**
@@ -23,6 +26,7 @@ public interface AdminService {
 	 * @param adminForm the admin form
 	 * @return the admin form
 	 */
+	@PreAuthorize("hasRole('superadmin')")
 	public AdminBean updateAdmin(AdminBean adminForm);
 
 	/**
@@ -30,6 +34,7 @@ public interface AdminService {
 	 *
 	 * @param adminId the admin id
 	 */
+	@PreAuthorize("hasRole('superadmin')")
 	public void deleteAdmin(final int adminId);
 
 	/**
@@ -38,6 +43,7 @@ public interface AdminService {
 	 * @param adminId the admin id
 	 * @return the admin by id
 	 */
+	@PreAuthorize("hasRole('superadmin')")
 	public AdminBean getAdminById(final int adminId);
 
 	/**
@@ -45,6 +51,7 @@ public interface AdminService {
 	 *
 	 * @return the list
 	 */
+	@PreAuthorize("hasRole('superadmin') or hasRole('admin')")
 	public List<AdminBean> getAllAdmins();
 
 }

@@ -1,3 +1,4 @@
+<%@taglib uri="http://www.springframework.org/security/tags" prefix="security"%>
 <div class="sidebar-user-info">
 
 	<div class="sui-normal">
@@ -20,15 +21,22 @@
 	<!-- DASHBOARD -->
 	<li class="active "><a href="./dashboard"><i class="fa fa-desktop"></i><span>Dashboard</span> </a></li>
 
-	<li class=" "><a href="./viewallhospitals"><i class="fa fa-sitemap"></i><span>Hospitals</span> </a></li>
+	<security:authorize access="hasRole('superadmin')">
+		<li class=" "><a href="./viewallhospitals"><i class="fa fa-sitemap"></i><span>Hospitals</span> </a></li>
+	</security:authorize>
 
-	<li class=""><a href="./viewalladmins"><i class="fa fa-user-md"></i><span>Admins</span> </a></li>
-	
-	<li class=""><a href="./viewalldoctors"><i class="fa fa-user-md"></i><span>Doctors</span> </a></li>
-	
-	<li class=""><a href="./viewallpatients"><i class="fa fa-user-md"></i><span>patients</span>
-				</a></li>
+	<security:authorize access="hasRole('superadmin')">
+		<li class=""><a href="./viewalladmins"><i class="fa fa-user-md"></i><span>Admins</span> </a></li>
+	</security:authorize>
 
+	<security:authorize access="hasRole('superadmin') or hasRole('admin')">
+		<li class=""><a href="./viewalldoctors"><i class="fa fa-user-md"></i><span>Doctors</span> </a></li>
+	</security:authorize>
+	
+	<security:authorize access="hasRole('admin') or hasRole('doctor')">
+		<li class=""><a href="./viewallpatients"><i class="fa fa-user-md"></i><span>patients</span> </a></li>
+	</security:authorize>
+	
 	<li class=""><a href="#"><i class="entypo-tag"></i><span>Payroll</span> </a>
 		<ul>
 			<li class=" "><a href="#"> <span><i class="entypo-dot"></i>Create Payroll</span>

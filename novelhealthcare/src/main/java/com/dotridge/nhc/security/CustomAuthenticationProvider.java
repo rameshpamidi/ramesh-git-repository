@@ -35,8 +35,8 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 			        	  authorities.add(grantedAuthority);
 					}
 			          System.out.println("authentication success");
-			          System.out.println("user name is:/t"+userDetails.getUserName());
-			          System.out.println("user roles are:/t"+userDetails.getRoles());
+			          System.out.println("user name is:\t"+userDetails.getUserName());
+			          System.out.println("user roles are:\t"+authorities);
 			          return new UsernamePasswordAuthenticationToken(authentication.getName(), authentication.getCredentials().toString(), authorities);
 				}
 		System.out.println("authentication fail");

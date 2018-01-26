@@ -1,12 +1,6 @@
 package com.dotridge.nhc.util;
 
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
-import com.dotridge.nhc.config.ApplicationConfig;
-import com.dotridge.nhc.entity.Admin;
-import com.dotridge.nhc.entity.Hospital;
-import com.dotridge.nhc.repository.AdminDaoImpl;
 
 public class Test {
 

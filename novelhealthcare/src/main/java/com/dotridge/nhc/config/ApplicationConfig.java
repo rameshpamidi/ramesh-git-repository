@@ -5,23 +5,25 @@ import java.util.Properties;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.jndi.JndiTemplate;
+import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @ComponentScan(basePackages = { "com.dotridge.nhc.repository", "com.dotridge.nhc.service" })
 @PropertySource(value = { "classpath:hibernate.properties" })
 @PropertySource(value = { "classpath:jndi.properties" })
-@ImportResource(value = { "classpath:novelhealth_security.xml" })
 @Import(WebSecurityConfig.class)
+@EnableTransactionManagement
 public class ApplicationConfig {
 
 	@Autowired
@@ -70,5 +72,12 @@ public class ApplicationConfig {
 		localSessionFactoryBean.setHibernateProperties(setHibernateProperties());
 		localSessionFactoryBean.setPackagesToScan("com.dotridge.nhc.entity");
 		return localSessionFactoryBean;
+	}
+	
+	@Bean
+	public HibernateTransactionManager createHibernateTransactionManager(SessionFactory sessionFactory)
+	{
+		HibernateTransactionManager hibernateTransactionManager=new HibernateTransactionManager(sessionFactory);
+		return hibernateTransactionManager;
 	}
 }

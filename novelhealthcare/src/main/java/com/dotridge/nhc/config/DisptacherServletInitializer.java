@@ -12,7 +12,6 @@ public class DisptacherServletInitializer extends AbstractAnnotationConfigDispat
 
 	@Override
 	protected Class<?>[] getServletConfigClasses() {
-		// TODO Auto-generated method stub
 		return new Class[]{WebMvcConfig.class};
 	}
 
